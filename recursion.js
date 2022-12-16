@@ -34,15 +34,13 @@ function everyOther(str, i=0, newString='', include=true) {
 
 // what's the time complexity here?
 function isPalindrome(str,i=0,reverse='') {
-  if(str.length === i){
-    if(reverse === str){
-      return true;
-    }else{
-      return false;
-    }
-  }
+  if(str.length === i) return true;
 
-  reverse += str[str.length - 1 - i];
+  let leftIdx = i;
+  let rightIdx = str.length -1 - i;
+  
+  if(str[leftIdx] !== str[rightIdx]) return false;
+
   return isPalindrome(str,i+1,reverse)
 }
 
@@ -69,12 +67,11 @@ function revString(str, i=0, reverse='') {
 /** gatherStrings: given an object, return an array of all of the string values. */
 
 function gatherStrings(obj, arr=[]) {
-  for(const [key,val] of Object.entries(obj)){
-    if(typeof(val)==='string'){
-      arr.push(val);
+  for(let key in obj){
+    if(typeof(obj[key])==='string'){
+      arr.push(obj[key]);
     }
-
-    if(typeof(val)==='object') gatherStrings(val,arr)
+    if(typeof(obj[key])==='object') gatherStrings(obj[key],arr)
     
   }
   return arr;
